@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathisaujogue <mathisaujogue@student.42    +#+  +:+       +#+        */
+/*   By: maujogue <maujogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:19 by mathisaujog       #+#    #+#             */
-/*   Updated: 2023/10/03 14:42:59 by mathisaujog      ###   ########.fr       */
+/*   Updated: 2023/10/04 11:25:11 by maujogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
-# include <cstring>
-# include <string.h>
-# include "contacts.hpp"
+# include <cstdlib>
 
 # define MAX_CONTACTS 8
 
@@ -26,6 +24,7 @@ class Phonebook
     
         Contacts	_contacts[MAX_CONTACTS];
         int			_nb;
+        int         _position;
         
         std::string truncInfo(std::string str); 
         void		displayInfo(void);

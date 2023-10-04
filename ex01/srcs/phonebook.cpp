@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathisaujogue <mathisaujogue@student.42    +#+  +:+       +#+        */
+/*   By: maujogue <maujogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:22 by mathisaujog       #+#    #+#             */
-/*   Updated: 2023/10/03 16:00:46 by mathisaujog      ###   ########.fr       */
+/*   Updated: 2023/10/04 11:24:50 by maujogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../incs/contacts.hpp"
 #include "../incs/phonebook.hpp"
 
 Phonebook::Phonebook (void)
 {
     _nb = 0;
+    _position = 0;
     return ;
 }
 
@@ -25,11 +27,13 @@ Phonebook::~Phonebook (void)
 
 void    Phonebook::addContact(Contacts c)
 {
-    if (this->_nb < MAX_CONTACTS - 1)
-        this->_contacts[this->_nb] = c;
+    this->_contacts[this->_position] = c;
+    if (this->_nb < MAX_CONTACTS)
+	    this->_nb++;
+    if (this->_position < MAX_CONTACTS - 1)
+        this->_position++;
     else
-        this->_contacts[0] = c;
-	this->_nb++;
+        this->_position = 0;
 }
 
 std::string Phonebook::truncInfo(std::string str)
@@ -72,12 +76,17 @@ void    Phonebook::displayContacts(void)
     int			i = 0;
     std::string	str;
     
+    if (this->_nb == 0)
+    {
+        std::cout << "No contacts to display!" << std::endl;
+        return ;
+    }
     std::cout << "---------------------------------------------" << std::endl;
     std::cout << "|     index|first name| last name|  nickname|" << std::endl;
     while (i < this->_nb)
     {
     	std::cout << "---------------------------------------------" << std::endl;
-        str = "|         " + std::to_string(i) + "|";
+        std::cout <<  "|         " << i <<  + "|";
         str += this->truncInfo(this->_contacts[i].getFirstName());
 		str += "|";
         str += this->truncInfo(this->_contacts[i].getLastName());
@@ -85,6 +94,7 @@ void    Phonebook::displayContacts(void)
         str += this->truncInfo(this->_contacts[i].getNickName());
 		str += "|";
 		std::cout << str << std::endl;
+        str.clear();
 		i++;
     }
     std::cout << "---------------------------------------------" << std::endl;

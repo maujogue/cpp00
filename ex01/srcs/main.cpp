@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathisaujogue <mathisaujogue@student.42    +#+  +:+       +#+        */
+/*   By: maujogue <maujogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:04:32 by mathisaujog       #+#    #+#             */
-/*   Updated: 2023/10/03 16:08:39 by mathisaujog      ###   ########.fr       */
+/*   Updated: 2023/10/04 11:24:08 by maujogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ std::string getInput(std::string type)
     
     while (1)
     {
-        std::getline(std::cin,str);
+        if (!(std::getline(std::cin,str)))
+            exit(0);
         if (str.empty())
             std::cout << "Error: input is empty" << std::endl;
         else if (std::isspace(str[0]))
@@ -85,12 +86,13 @@ int main (void)
 
     std::cout << "Please enter of the following commands:" << std::endl;
     std::cout << "ADD: save a new contact"<< std::endl;
-    std::cout << "Search: display a specific contact" << std::endl;
+    std::cout << "SEARCH: display a specific contact" << std::endl;
     std::cout << "EXIT" << std::endl;
     while (1)
     {
         std::cout << "->";
-        std::getline(std::cin, cmd);
+        if (!(std::getline(std::cin, cmd)))
+            exit(0);
         if (cmd == "ADD")
             Phonebook.addContact(createContact());
         else if (cmd == "SEARCH")
